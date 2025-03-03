@@ -1,0 +1,26 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 1rem 2rem;
+}
+
+.plate-image {
+    height: auto;
+    width: 80px;
+}
+
+.header-link {
+    margin-left: 1rem;
+    font-size: 1.1rem;
+    border-bottom: 3px solid transparent;
+    transition: border-width 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.header-link:hover {
+    cursor: pointer;
+    border-bottom-color: rgb(26, 26, 67);
+    border-bottom-width: 3px;
+}

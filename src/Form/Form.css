@@ -1,0 +1,11 @@
+.form-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100dvh;
+    background-image: url('../assets/images/background.Dahyfeam.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0px 0%;
+    transition: all 0.5s ease;
+}
