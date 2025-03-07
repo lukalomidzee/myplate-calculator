@@ -1,13 +1,13 @@
 button {
     color: rgb(255, 255, 255);
     background-color: #d53e10;
-    width: 8rem;
-    height: 3rem;
+    width: var(--button-width);
+    height: var(--button-height);
     transition: 0.2s ease;
     cursor: pointer;
     border: 0;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: var(--button-border-radius);
+    font-size: 1rem;
 }
 
 button:hover {

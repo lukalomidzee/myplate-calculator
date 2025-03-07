@@ -1,0 +1,20 @@
+.back-button {
+    color: rgb(42, 130, 130);
+    background-color: #ffffff;
+    width: 8rem;
+    height: 3rem;
+    transition: 0.1s ease;
+    cursor: pointer;
+    border: 0;
+    border-radius: var(--button-border-radius);
+    font-size: 16px;
+    border: 1px solid white;
+    /* box-sizing: border-box; */
+}
+
+.back-button:hover {
+    background-color: #f3f3f3;
+    text-decoration: underline;
+
+    border: 1px solid rgb(42, 130, 130);
+}

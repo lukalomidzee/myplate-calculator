@@ -1,6 +1,6 @@
 .form-div {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     height: 100dvh;
     background-image: url('../assets/images/background.Dahyfeam.webp');

@@ -1,7 +1,7 @@
 import './CardHeader.css'
 import usdaIcon from '../../../assets/icons/logo-usda.CUpBftSY.png';
 import plateIcon from '../../../assets/icons/myplate-brand.svg';
-import Button from '../Button/Button';
+import BackButton from '../Button/BackButton';
 
 function CardHeader(props){
 
@@ -11,11 +11,12 @@ function CardHeader(props){
         // document.getElementById('gather-data').classList.add('gather-data');
         document.getElementById('gather-data').classList.add('hidden');
         document.getElementById('form').style.backgroundPositionY = '0%';
+        document.getElementsByClassName('header')[0].scrollIntoView({behavior: 'smooth', block: 'start'});
     }
 
-    let backButton = props.backButton ? <Button title='Back' onClick={returnToIntroduction} /> : null
+    let backButton = props.backButton ? <BackButton title='Back' onClick={returnToIntroduction} /> : null
     
-    let header = props.header ? <h3>{props.header}</h3> : null
+    let header = props.header ? <p id='card-header-paragraph'>{props.header}</p> : null
     return (
         <div className='cardHeader'>
             {backButton}

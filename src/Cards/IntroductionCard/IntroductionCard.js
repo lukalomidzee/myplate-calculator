@@ -11,6 +11,7 @@ function IntroductionCard() {
         document.getElementById('introduction').classList.add('hidden');
         document.getElementById('gather-data').classList.remove('hidden');
         document.getElementById('form').style.backgroundPositionY = '12.5%';
+        document.getElementById('form').scrollIntoView({behavior: 'smooth', block: 'start'});
     }
     
     return (

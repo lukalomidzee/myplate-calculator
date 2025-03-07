@@ -1,0 +1,18 @@
+select {
+    background-color: white;
+    width: var(--selector-width);
+    border: 1.5px solid #2A8282;
+    border-radius: 5px;
+    padding: 12px 48px 12px 25px;
+    font-size: 18px;
+    line-height: 24px;
+    cursor: pointer;
+    padding: 12px 48px 12px 25px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg%20width='14'%20height='9'%20viewBox='0%200%2014%209'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M1%201.82422L6.99251%207.82422L12.985%201.82422'%20stroke='black'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position:
+    calc(100% - 12px) center;
+    background-size: 16px;
+    transition: 0.3s all ease;
+}
