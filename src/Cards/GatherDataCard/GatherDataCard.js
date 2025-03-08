@@ -1,4 +1,5 @@
 import CardBody from '../CardAssets/CardBody/CardBody';
+import CardAccordion from '../CardAssets/CardAccordion/CardAccordion';
 import CardFooter from '../CardAssets/CardFooter/CardFooter';
 import CardHeader from '../CardAssets/CardHeader/CardHeader';
 import Selector from '../CardAssets/Selector/Selector';
@@ -13,7 +14,7 @@ function GatherDataCard(props){
     let [age, setAge] = useState(0);
     let [sex, setSex] = useState('');
 
-    function HeightWeightSection(){
+    function customFunction(){
         // document.getElementById('introduction').classList.add('hidden');
         // document.getElementById('gather-data').classList.remove('hidden');
         // document.getElementById('form').style.backgroundPositionY = '12.5%';
@@ -23,21 +24,20 @@ function GatherDataCard(props){
     return (
         <section className='hidden gather-data' id='gather-data'>
             <CardHeader backButton='Back' header='Calculate Your MyPlate Plan' />
-            <CardBody header="Age & Sex" paragraph={["Please provide data from the following sections to calculate result properly. ", "No personal information is stored"]}/>
+            <CardAccordion />
+            {/* <CardBody header="Age & Sex" paragraph={["Please provide data from the following sections to calculate result properly. ", "No personal information is stored"]}/>
             <div style={styles.container}>
-                <Selector hint="Age" selectValues={ageSelector} onChange={(e) => {
+                <Selector hint="Age" sel    ectValues={ageSelector} onChange={(e) => {
                     setAge(e.target.value);
                 }}/>
                 <Selector hint="Select Sex" selectValues={sexSelector} onChange={(e) => {
                     setSex(e.target.value);
                 }}/>
             </div>
-            <Button onClick={HeightWeightSection} title="Next" />
+            <Button onClick={customFunction} title="Next" /> */}
             <CardFooter />
         </section>
     )
-
-    
 }
 
 const styles = {
