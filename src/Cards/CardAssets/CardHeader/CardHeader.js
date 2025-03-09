@@ -14,7 +14,7 @@ function CardHeader(props){
         document.getElementsByClassName('header')[0].scrollIntoView({behavior: 'smooth', block: 'start'});
     }
 
-    let backButton = props.backButton ? <BackButton title='Back' onClick={returnToIntroduction} /> : null
+    let backButton = props.backButton ? <BackButton title='Back' onClick={props.changeState} /> : null
     
     let header = props.header ? <p id='card-header-paragraph'>{props.header}</p> : null
     return (

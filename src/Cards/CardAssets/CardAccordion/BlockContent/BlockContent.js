@@ -3,7 +3,7 @@ import './BlockContent.css';
 function BlockContent(props) {
     return(
         <div>
-            content
+            {props.content}
         </div>
     );
 }
