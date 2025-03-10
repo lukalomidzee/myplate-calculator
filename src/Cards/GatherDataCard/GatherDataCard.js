@@ -22,6 +22,11 @@ function GatherDataCard(props){
         breastfeeding: undefined,
         breastfeedingAmount: undefined,
         breastfeedingTime: undefined,
+        finalCalories: 0,
+        low: 0,
+        mid: 0,
+        high: 0,
+        selectedActivity: undefined,
     })
 
     return (

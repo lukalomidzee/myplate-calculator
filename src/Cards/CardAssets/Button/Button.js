@@ -1,9 +1,10 @@
 import React from 'react';
 import './Button.css';
 
-function Button({ onClick, title }){
+function Button({ onClick, title, disabled, id }){
     return (
-        <button onClick={onClick}>{title}</button>
+        disabled ? <button onClick={onClick} disabled>{title}</button> :
+        <button id={id} onClick={onClick}>{title}</button>
     )
 }
 
