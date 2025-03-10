@@ -1,4 +1,5 @@
 // import CardBody from '../CardAssets/CardBody/CardBody';
+import { useState } from 'react';
 import CardAccordion from '../CardAssets/CardAccordion/CardAccordion';
 // import CardFooter from '../CardAssets/CardFooter/CardFooter';
 import CardHeader from '../CardAssets/CardHeader/CardHeader';
@@ -10,21 +11,23 @@ import CardHeader from '../CardAssets/CardHeader/CardHeader';
 import './GatherDataCard.css'
 
 function GatherDataCard(props){
-
-    // let [age, setAge] = useState(0);
-    // let [sex, setSex] = useState('');
-
-    // function customFunction(){
-    //     // document.getElementById('introduction').classList.add('hidden');
-    //     // document.getElementById('gather-data').classList.remove('hidden');
-    //     // document.getElementById('form').style.backgroundPositionY = '12.5%';
-    //     // document.getElementById('form').scrollIntoView({behavior: 'smooth', block: 'start'});
-    // }
+    const [userDetails, setUserDetails] = useState({
+        age: undefined,
+        sex: undefined,
+        weight: undefined,
+        height: undefined,
+        activityLevel: "low",
+        pregnant: undefined,
+        pregnancyTrimester: undefined,
+        breastfeeding: undefined,
+        breastfeedingAmount: undefined,
+        breastfeedingTime: undefined,
+    })
 
     return (
         <section className='gather-data card' id='gather-data'>
             <CardHeader backButton='Back' header='Calculate Your MyPlate Plan' changeState={props.changeState}/>
-            <CardAccordion />
+            <CardAccordion userDetails={userDetails} setUserDetails={setUserDetails} />
             {/* <CardBody header="Age & Sex" paragraph={["Please provide data from the following sections to calculate result properly. ", "No personal information is stored"]}/>
             <div style={styles.container}>
                 <Selector hint="Age" sel    ectValues={ageSelector} onChange={(e) => {

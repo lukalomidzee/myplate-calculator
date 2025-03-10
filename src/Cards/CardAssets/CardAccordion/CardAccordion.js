@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import AccordionBlock from './AccordionBlock/AccordionBlock';
 import Selector from '../Selector/Selector';
 import { ageSelector, sexSelector } from '../Selector/SelectorValues';
@@ -6,9 +5,10 @@ import './CardAccordion.css';
 import Button from '../Button/Button';
 
 function CardAccordion(props){
-    
-    let [age, setAge] = useState(0);
-    let [sex, setSex] = useState('');
+    let userDetails = props.userDetails;
+    let setUserDetails = props.setUserDetails;
+
+    console.log(userDetails);
 
     function sectionTwo(){
         console.log("Section two")
@@ -23,17 +23,17 @@ function CardAccordion(props){
                         Age & Sex
                     </h1>
                     <p>
-                        Please provide data accordingly to calculate proper results. <br /><br /><b>NOTE:</b> No personal information is being stored
+                        Please provide data accordingly to calculate correct results. <br /><br /><b>NOTE:</b> No personal information is being stored
                     </p>
                 </div>
             } 
             content={
                 <div style={styles.container}>
-                    <Selector hint="Age" sel    selectValues={ageSelector} onChange={(e) => {
-                        setAge(e.target.value);
+                    <Selector hint="Age" selectValues={ageSelector} onChange={(e) => {
+                        setUserDetails(prev => ({...prev, age: e.target.value}));
                     }}/>
                     <Selector hint="Select Sex" selectValues={sexSelector} onChange={(e) => {
-                        setSex(e.target.value);
+                        setUserDetails(prev => ({...prev, sex: e.target.value}));
                     }}/>
                 </div>
             }/>
