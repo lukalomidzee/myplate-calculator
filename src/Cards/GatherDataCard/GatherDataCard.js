@@ -31,7 +31,7 @@ function GatherDataCard(props){
 
     return (
         <section className='gather-data card' id='gather-data'>
-            <CardHeader backButton='Back' header='Calculate Your MyPlate Plan' changeState={props.changeState}/>
+            <CardHeader backButton='Back' header="GNSPEN" changeState={props.changeState}/>
             <CardAccordion userDetails={userDetails} setUserDetails={setUserDetails} />
             {/* <CardBody header="Age & Sex" paragraph={["Please provide data from the following sections to calculate result properly. ", "No personal information is stored"]}/>
             <div style={styles.container}>

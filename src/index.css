@@ -1,8 +1,9 @@
-:root {
-  font-size: 16px;
+@media (max-width: 480px) {
+  :root {
+    font-size: 16px;
 
   /* Default: Mobile (XS)  */
-  --header-height: 3.2rem;
+  --header-height: 3rem;
   --footer-height: 3.2rem;
   --card-width: 80%;
   --card-height: 50%;
@@ -29,85 +30,125 @@
   /* Icons */
   --icon-header: 4rem;
   --icon-card: 4rem;
-
+  }
 }
+
 
 /* 📱 Mobile (Small) */
 @media (min-width: 480px) {
   :root {
-    --header-height: 60px;
-    --footer-height: 55px;
-    --card-width: 85%;
-    --card-padding: 14px;
-    --card-border-radius: 10px;
+    font-size: 16px;
+
+    --header-height: 3rem;
+    --card-width: 65%;
+    --card-height: 50%;
+    --card-padding: 0.75rem;
+    --card-border-radius: 0.5rem;
     
-    --button-height: 40px;
-    --button-padding-lr: 14px;
-    --button-border-radius: 24px;
+    --button-height: 3rem;
+    --button-width: 8rem;
+    --button-padding-lr: 0.75rem;
+    --button-border-radius: 0.4rem;
+    --back-button-width: 3rem;
+    --back-button-height: 4rem;
+    --selector-width: 16rem;
 
-    --font-h1: 26px;
-    --font-h2: 24px;
-    --font-h3: 22px;
-    --font-h4: 20px;
-    --font-h5: 18px;
-    --font-p: 16px;
+    --font-h1: 1rem;
+    --font-h2: 0.9rem;
+    --font-h3: 0.8rem;
+    --font-p: 0.6rem;
 
-    --icon-header: 20px;
-    --icon-card: 18px;
+    --icon-header: 4rem;
+    --icon-card: 4rem;
   }
 }
+
 
 /* 📱 Tablet */
 @media (min-width: 768px) {
   :root {
     font-size: 18px;
-    --header-height: 70px;
-    --footer-height: 60px;
-    --card-width: 70%;
-    --card-padding: 16px;
-    --card-border-radius: 12px;
+    --header-height: 2.5rem;
+    --card-width: 50%;
+    --card-height: 50%;
+    --card-padding: 1rem;
+    --card-border-radius: 0.5rem;
     
-    --button-height: 44px;
-    --button-padding-lr: 16px;
-    --button-border-radius: 10px;
+    --button-height: 3rem;
+    --button-width: 8rem;
+    --button-padding-lr: 0.75rem;
+    --button-border-radius: 0.4rem;
+    --back-button-width: 3rem;
+    --back-button-height: 4rem;
+    --selector-width: 16rem;
 
-    --font-h1: 32px;
-    --font-h2: 28px;
-    --font-h3: 26px;
-    --font-h4: 22px;
-    --font-h5: 20px;
-    --font-p: 18px;
-
-    --icon-header: 22px;
-    --icon-card: 20px;
+    --font-h1: 1rem;
+    --font-h2: 0.9rem;
+    --font-h3: 0.8rem;
+    --font-p: 0.6rem;
+    
+    --icon-header: 4rem;
+    --icon-card: 4rem;
   }
 }
 
 /* 🖥️ Desktop */
 @media (min-width: 1024px) {
   :root {
-    font-size: 20px; 
-    --header-height: 80px;
-    --footer-height: 70px;
+    font-size: 18px;
+    --header-height: 2.5rem;
     --card-width: 50%;
-    --card-padding: 20px;
-    --card-border-radius: 16px;
+    --card-height: 50%;
+    --card-padding: 1rem;
+    --card-border-radius: 0.5rem;
     
-    --button-height: 48px;
-    --button-padding-lr: 18px;
-    --button-border-radius: 12px;
+    --button-height: 3rem;
+    --button-width: 8rem;
+    --button-padding-lr: 0.75rem;
+    --button-border-radius: 0.4rem;
+    --back-button-width: 3rem;
+    --back-button-height: 4rem;
+    --selector-width: 16rem;
 
-    --font-h1: 36px;
-    --font-h2: 32px;
-    --font-h3: 28px;
-    --font-h4: 24px;
-    --font-h5: 22px;
-    --font-p: 18px;
-
-    --icon-header: 24px;
-    --icon-card: 22px;
+    --font-h1: 1rem;
+    --font-h2: 0.9rem;
+    --font-h3: 0.8rem;
+    --font-p: 0.6rem;
+    
+    --icon-header: 4rem;
+    --icon-card: 4rem;
   }
 }
+
+@media (min-width: 1280px) {
+  :root {
+    font-size: 20px;
+    --header-height: 2.5rem;
+    --card-width: 50%;
+    --card-height: 50%;
+    --card-padding: 1rem;
+    --card-border-radius: 0.5rem;
+    
+    --button-height: 3rem;
+    --button-width: 8rem;
+    --button-padding-lr: 0.75rem;
+    --button-border-radius: 0.4rem;
+    --back-button-width: 3rem;
+    --back-button-height: 4rem;
+    --selector-width: 16rem;
+
+    --font-h1: 1rem;
+    --font-h2: 0.9rem;
+    --font-h3: 0.8rem;
+    --font-p: 0.6rem;
+    
+    --icon-header: 4rem;
+    --icon-card: 4rem;
+  }
+}
+
+
+
 
 body {
   margin: 0;

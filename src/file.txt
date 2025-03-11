@@ -1,0 +1,39 @@
+
+:root {
+  font-size: 16px;
+
+  /* Default: Mobile (XS)  */
+  --header-height: 3rem;
+  --footer-height: 3.2rem;
+  --card-width: 80%;
+  --card-height: 50%;
+  --card-padding: 0.75rem;
+  --card-border-radius: 0.5rem;
+  
+  /* Buttons & Selectors */
+  --button-height: 3rem;
+  --button-width: 8rem;
+  --button-padding-lr: 0.75rem;
+  --button-border-radius: 0.4rem;
+  --back-button-width: 3rem;
+  --back-button-height: 4rem;
+  --selector-width: 16rem;
+
+  /* Font Sizes */
+  --font-h1: 1.5rem;
+  --font-h2: 1.4rem;
+  --font-h3: 1.2rem;
+  --font-h4: 1rem;
+  --font-h5: 0.8rem;
+  --font-p: 0.8rem;
+
+  /* Icons */
+  --icon-header: 4rem;
+  --icon-card: 4rem;
+
+}
+
+<div className="cardHeaderIcons" >
+                {/* {props.introduction ? <img src={mrnutritionfull} className='headerIcon' alt='mrnutrition-icon'/> : <img src={mrnutritionlogo} className='headerIcon' alt='mrnutrition-icon'/>} */}
+                {/* <img src={mrnutritionlogo} className='headerIcon' alt='mrnutrition-icon'/> */}
+            </div>
