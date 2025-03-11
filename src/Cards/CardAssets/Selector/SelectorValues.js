@@ -107,3 +107,15 @@ export const sexSelector = {
     male: "Male",
     female: "Female"
 }
+
+export const pregnancyBreastfeedingSelector = {
+    pregnant: "Pregnant",
+    breastfeeding: "Breastfeeding / Lactating",
+    none: "Neither",
+}
+
+export const trimesterSelector = {
+    1: "First Trimester",
+    2: "Second Trimester",
+    3: "Third Trimester",
+}

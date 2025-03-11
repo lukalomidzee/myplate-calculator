@@ -16,7 +16,7 @@ function GatherDataCard(props){
         sex: undefined,
         weight: undefined,
         height: undefined,
-        activityLevel: "low",
+        activityLevel: undefined,
         pregnant: undefined,
         pregnancyTrimester: undefined,
         breastfeeding: undefined,
@@ -44,6 +44,7 @@ function GatherDataCard(props){
             </div>
             <Button onClick={customFunction} title="Next" /> */}
             {/* <CardFooter /> */}
+            <div></div>
         </section>
     )
 }

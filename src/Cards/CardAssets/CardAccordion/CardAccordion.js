@@ -1,9 +1,10 @@
 import AccordionBlock from './AccordionBlock/AccordionBlock';
 import Selector from '../Selector/Selector';
-import { ageSelector, sexSelector } from '../Selector/SelectorValues';
+import { ageSelector, sexSelector, pregnancyBreastfeedingSelector, trimesterSelector } from '../Selector/SelectorValues';
 import './CardAccordion.css';
 import Button from '../Button/Button';
 import { useState } from 'react';
+import Input from '../Input/Input';
 
 function CardAccordion(props){
     let userDetails = props.userDetails;
@@ -11,30 +12,61 @@ function CardAccordion(props){
 
     // let [buttonDisabled, setButtonDisabled] = useState(true);
 
+    let ageGroup = undefined;
     
     const [currentStep, setCurrentStep] = useState(1);
+
+    // let lastStep = 0;
+
+    function finalResults(){
+        console.log(userDetails.age);
+        console.log(userDetails.finalCalories);
+        if (userDetails.age < 2){
+            ageGroup = "0-1";
+        }
+        else if (userDetails.age < 4){
+            ageGroup = "2-3";
+        }
+        else if (userDetails.age < 9){
+            ageGroup = "4-8";
+        }
+        else if (userDetails.age < 14){
+            ageGroup = "9-13";
+        }
+        else {
+            ageGroup = "14-99";
+        }
+        window.location.href = `https://www.myplate.gov/myplate-plan/results/english/${ageGroup}/${userDetails.finalCalories}`;
+    }
     
     function stepFinished(){
+        //#region background movement
+        let backgroundPosition = parseFloat(document.getElementById('form').style.backgroundPositionY);
+        backgroundPosition += 12.5;
+        document.getElementById('form').style.backgroundPositionY = backgroundPosition + '%';
+        //#endregion
+ 
         console.log(userDetails);
-        //#region Under 2 years
+        //#region Under 2 years - No need to calculate additional details
         if (userDetails.age <= 2){
             switch (userDetails.age) {
-                case 1:
+                case "1":
                     userDetails.finalCalories = "800";
                     break;
-                case 1.25:
+                case "1.25":
                     userDetails.finalCalories = userDetails.sex === "male" ? "900" : "800";
                     break;
-                case 1.5:
+                case "1.5":
                     userDetails.finalCalories = userDetails.sex === "male" ? "1000" : "900";
                     break;
                 default:
                     userDetails.finalCalories = "1000"
                 }
-            setCurrentStep(6);
+            setCurrentStep(7);
+            return;
         }
         //#endregion
-        //#region 2-8 years
+        //#region 2-8 years - first, we determine sex and then activity level
         else if (userDetails.age <= 8){
             if (userDetails.sex === "male")
                 switch (userDetails.age) {
@@ -72,6 +104,11 @@ function CardAccordion(props){
                     userDetails.low = 1400;
                     userDetails.mid = 1600;
                     userDetails.high = 2000;
+                    break;
+                default:
+                    userDetails.low = 1200;
+                    userDetails.mid = 1400;
+                    userDetails.high = 1600;
                     break;
                 }
             else
@@ -111,20 +148,128 @@ function CardAccordion(props){
                     userDetails.mid = 1600;
                     userDetails.high = 1800;
                     break;
+                default:
+                    userDetails.low = 1200;
+                    userDetails.mid = 1400;
+                    userDetails.high = 1400;
+                    break;
             }
-            setCurrentStep(5);
-        //#endregion
+            setCurrentStep(6);
+            return;
         }
-        setCurrentStep(2);
+        //#endregion
+        //#region Age over 8 years
+        else {
+            
+            //#region Women 14-50
+            if ((userDetails.age >= 14 && userDetails.age <= 50) && userDetails.sex === "female" ){
+                if (userDetails.pregnant === undefined && userDetails.breastFeeding === undefined){
+                    setCurrentStep(3);
+                    return;
+                }
+                else if (userDetails.pregnant === true){
+                    setCurrentStep(4);
+                    return;
+                }
+                else if (userDetails.breastFeeding === true){
+                    setCurrentStep(5);
+                    return;
+                }
+                else if (userDetails.weight === undefined && userDetails.height === undefined){
+                    setCurrentStep(2);
+                    return
+                }
+                else if (userDetails.activityLevel === undefined){
+                    setCurrentStep(6);
+                    return
+                }
+                else {
+                    setCurrentStep(7);
+                    return
+                }
+            }
+            //#endregion
+            //#region Men over 8
+            else {
+                if (userDetails.weight === undefined && userDetails.height === undefined){
+                    setCurrentStep(2);
+                    return
+                }
+                else if (userDetails.activityLevel === undefined){
+                    setCurrentStep(6);
+                    return
+                }
+                else {
+                    setCurrentStep(7);
+                    return
+                }
+            }
+            //#endregion
+        }
+        //#endregion
+        // setCurrentStep(6);
     }
 
-    const [firstSelection, setFirstSelection] = useState("");
-    const [secondSelection, setSecondSelection] = useState("");
-    const isButtonDisabled = !(firstSelection && secondSelection);
+    //#region First section button
+    const [stepOnefirstSelection, setStepOneFirstSelection] = useState("");
+    const [stepOnesecondSelection, setStepOneSecondSelection] = useState("");
+    const isFirstButtonDisabled = !(stepOnefirstSelection && stepOnesecondSelection);
+    //#endregion
+
+    //#region Second section button
+    const [isHeightValid, setIsHeightValid] = useState(false);
+    const [isWeightValid, setIsWeightValid] = useState(false);
+    const [isSecondButtonDisabled, setIsSecondButtonDisabled] = useState(true);
+
+    const [heightTouched, setHeightTouched] = useState(false);
+    const [weightTouched, setWeightTouched] = useState(false);
+    // Height Validation
+    const handleHeightChange = (e) => {
+        setHeightTouched(true);
+        const value = parseInt(e.target.value, 10);
+        const valid = value >= 100 && value <= 300;
+        setIsHeightValid(valid);
+        updateButtonState(valid, isWeightValid);
+        if (valid){
+            setUserDetails(prev => ({...prev, height: e.target.value}));
+        }
+    };
+
+    // Weight Validation
+    const handleWeightChange = (e) => {
+        setWeightTouched(true);
+        const value = parseInt(e.target.value, 10);
+        const valid = value >= 14 && value <= 630;
+        setIsWeightValid(valid);
+        updateButtonState(isHeightValid, valid);
+        if (valid){
+            setUserDetails(prev => ({...prev, weight: e.target.value}));
+        }
+    };
+
+    // Enable button only when both inputs are valid
+    const updateButtonState = (heightValid, weightValid) => {
+        setIsSecondButtonDisabled(!(heightValid && weightValid));
+    };
+    //#endregion
+
+    //#region Third section button
+    const [stepThreefirstSelection, setStepThreeFirstSelection] = useState("");
+    const isThirdButtonDisabled = !(stepThreefirstSelection);
+    //#endregion
+
+    //#region 
+    const [stepFourfirstSelection, setStepFourFirstSelection] = useState("");
+    const isFourthButtonDisabled = !(stepFourfirstSelection);
+    //#endregion
+    
+    
+    //#region 
 
     return (
         
-        <div style={styles.outDiv}>
+        <div className="card-accordion" style={styles.outDiv}>
+            {/* 1st step */}
             {currentStep === 1 && 
                 (
                     <AccordionBlock header=
@@ -144,49 +289,205 @@ function CardAccordion(props){
                             
                             <Selector hint="Age" selectValues={ageSelector} onChange={(e) => {
                                 setUserDetails(prev => ({...prev, age: e.target.value}));
-                                setFirstSelection(e.target.value);
+                                setStepOneFirstSelection(e.target.value);
                             }}/>
                             <Selector hint="Select Sex" selectValues={sexSelector} onChange={(e) => {
                                 setUserDetails(prev => ({...prev, sex: e.target.value}));
-                                setSecondSelection(e.target.value);
+                                setStepOneSecondSelection(e.target.value);
                             }}/>
                             <br />
-                            <Button id="age-sex-button" disabled={isButtonDisabled} onClick={stepFinished} title="Next"/>
+                            <Button id="age-sex-button" disabled={isFirstButtonDisabled} onClick={stepFinished} title="Next"/>
                         </div>
                     }/>
                 )
-        
             }
-            {currentStep === 2 && (
-                <AccordionBlock header=
-                {
-                    <div>
-                        <h1>
-                            Age & Sex
-                        </h1>
-                        <p>
-                            Please provide data accordingly to calculate correct results. <br /><br /><b>NOTE:</b> No personal information is being stored
-                        </p>
-                    </div>
-                } 
-                content={
-                    <div style={styles.container}>
-                        
-                        
-                        <Selector hint="Age" selectValues={ageSelector} onChange={(e) => {
-                            setUserDetails(prev => ({...prev, age: e.target.value}));
-                            setFirstSelection(e.target.value);
-                        }}/>
-                        <Selector hint="Select Sex" selectValues={sexSelector} onChange={(e) => {
-                            setUserDetails(prev => ({...prev, sex: e.target.value}));
-                            setSecondSelection(e.target.value);
-                        }}/>
-                        <br />
-                        <Button id="age-sex-button" disabled={isButtonDisabled} onClick={stepFinished} title="Next"/>
-                    </div>
-                }/>
-            )}
-            {/* <Button disabled={buttonDisabled} onClick={sectionTwo} title="Next"/> */}
+            {/* 1st step */}
+
+
+            {/* 2nd step */}
+            {currentStep === 2 && 
+                (
+                    <AccordionBlock
+                        header={<h1>Height & Weight</h1>}
+                        content={
+                            <div style={styles.container}>
+                                {/* Height Input */}
+                                <Input
+                                    id="height-input"
+                                    name="Height (CM)"
+                                    type="number"
+                                    min={100}
+                                    max={300}
+                                    style={{ outline: heightTouched && !isHeightValid ? "2px solid red" : "none" }}
+                                    onChange={handleHeightChange}
+                                />
+                                <div style={{height: '1rem'}}>
+                                    {heightTouched && !isHeightValid && (
+                                        <p style={{ color: "red", margin: 0 }}>Height must be between 100-300 cm</p>
+                                    )}
+                                </div>
+
+                                {/* Weight Input */}
+                                <Input
+                                    id="weight-input"
+                                    name="Weight (KG)"
+                                    type="number"
+                                    min={14}
+                                    max={630}
+                                    style={{ outline: weightTouched && !isWeightValid ? "2px solid red" : "none" }}
+                                    onChange={handleWeightChange}
+                                />
+                                <div style={{height: '1rem'}}>
+                                    {weightTouched && !isWeightValid && (
+                                        <p style={{ color: "red", margin: 0 }}>Weight must be between 14-630 kg</p>
+                                    )}
+                                </div>
+
+                                <br />
+                                <Button
+                                    id="height-weight-button"
+                                    disabled={isSecondButtonDisabled}
+                                    onClick={stepFinished}
+                                    title="Next"
+                                />
+                            </div>
+                        }
+                    />
+        
+                    // <AccordionBlock header=
+                    // {
+                    //     <div>
+                    //         <h1>
+                    //             Height & Weight
+                    //         </h1>
+                    //     </div>
+                    // } 
+                    // content={
+                    //     <div style={styles.container}>
+                    //         <Input id="height-input" name="Height(CM)" min={100} max={300} onChange={setStepTwoFirstSelection}/>
+                            
+                    //         <Input id="weight-input" name="Weight(KG)" min={14} max={630} onChange={setStepTwoSecondSelection}/>
+                            
+                    //         <br />
+                    //         <Button id="height-weight-button" disabled={isSecondButtonDisabled} onClick={stepFinished} title="Next"/>
+                    //     </div>
+                    // }/>
+                )
+            }
+            {/* 2nd step */}
+
+            {/* 3rd step */}
+            {currentStep === 3 && 
+                (
+                    <AccordionBlock header=
+                    {
+                        <div>
+                            <h1>
+                                Pregnancy and Breastfeeding
+                            </h1>
+                            <p>
+                                Are you pregnant or breastfeeding/lactating?
+                            </p>
+                        </div>
+                    } 
+                    content={
+                        <div style={styles.container}>
+                            
+                            
+                            <Selector hint="Select below" selectValues={pregnancyBreastfeedingSelector} onChange={(e) => {
+                                if (e.target.value === "pregnant"){
+                                    setUserDetails(prev => ({
+                                        ...prev, pregnant: true,
+                                        breastfeeding: false,
+                                        breastfeedingAmount: null,
+                                        breastfeedingTime: null,
+                                    }));    
+                                }
+                                else if (e.target.value === "breastfeeding"){
+                                    setUserDetails(prev => ({
+                                        ...prev, breastfeeding: true,
+                                        pregnant: false, 
+                                        pregnancyTrimester: null,
+                                    }));
+                                }
+                                else {
+                                    setUserDetails(prev => ({
+                                        ...prev, 
+                                        pregnant: false, 
+                                        pregnancyTrimester: null,
+                                        breastfeeding: false,
+                                        breastfeedingAmount: null,
+                                        breastfeedingTime: null,
+                                    }));
+                                }
+                                setStepThreeFirstSelection(e.target.value);
+                            }}/>
+                            
+                            <br />
+                            <Button id="pregnancy-breastfeeding-button" disabled={isThirdButtonDisabled} onClick={stepFinished} title="Next"/>
+                        </div>
+                    }/>
+                )
+            }
+            {/* 3rd step */}
+
+            {/* 4th step */}
+            {currentStep === 4 && 
+                (
+                    <AccordionBlock header=
+                    {
+                        <div>
+                            <h1>
+                                What trimester are you in?
+                            </h1>
+                        </div>
+                    } 
+                    content={
+                        <div style={styles.container}>
+                            
+                            
+                            <Selector hint="Select below" selectValues={trimesterSelector} onChange={(e) => {
+                                setUserDetails(prev => ({...prev, pregnancyTrimester: e.target.value}));
+                                setStepFourFirstSelection(e.target.value);
+                            }}/>
+                            <br />
+                            <Button id="trimester-button" disabled={isFourthButtonDisabled} onClick={stepFinished} title="Next"/>
+                        </div>
+                    }/>
+                )
+            }
+            {/* 4th step */}
+
+
+
+            {/* 7th step */}
+            {currentStep === 7 && 
+                (
+                    <AccordionBlock header=
+                    {
+                        <div>
+                            <h1>
+                                Age & Sex
+                            </h1>
+                            <h3>
+                                {ageSelector[userDetails.age]} / {userDetails.sex}
+                            </h3>
+                            <p>
+                                Based on the provided data, estimated calories intake should be <b>{userDetails.finalCalories}</b>.
+                            </p>
+                            <p>
+                                Click the button below to see detailed outcome of results. 
+                            </p>
+                        </div>
+                    } 
+                    content={
+                        <div style={styles.container}>
+                            <Button id="view-results" onClick={finalResults} title="Results"/>
+                        </div>
+                    }/>
+                )
+            }
+            {/* 7th step */}
         </div>
     );
 }
