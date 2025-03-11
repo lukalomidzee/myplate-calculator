@@ -1,10 +1,11 @@
 import AccordionBlock from './AccordionBlock/AccordionBlock';
 import Selector from '../Selector/Selector';
-import { ageSelector, sexSelector, pregnancyBreastfeedingSelector, trimesterSelector } from '../Selector/SelectorValues';
+import { ageSelector, sexSelector, pregnancyBreastfeedingSelector, trimesterSelector, breastfeedingAmount, breastfeedingTime, activitySelector } from '../Selector/SelectorValues';
 import './CardAccordion.css';
 import Button from '../Button/Button';
 import { useState } from 'react';
 import Input from '../Input/Input';
+import calculateCalories from './calculateCalories';
 
 function CardAccordion(props){
     let userDetails = props.userDetails;
@@ -19,8 +20,6 @@ function CardAccordion(props){
     // let lastStep = 0;
 
     function finalResults(){
-        console.log(userDetails.age);
-        console.log(userDetails.finalCalories);
         if (userDetails.age < 2){
             ageGroup = "0-1";
         }
@@ -167,11 +166,11 @@ function CardAccordion(props){
                     setCurrentStep(3);
                     return;
                 }
-                else if (userDetails.pregnant === true){
+                else if (userDetails.pregnant === true && userDetails.pregnancyTrimester === undefined){
                     setCurrentStep(4);
                     return;
                 }
-                else if (userDetails.breastFeeding === true){
+                else if (userDetails.breastfeeding === true && userDetails.breastfeedingAmount === undefined && userDetails.breastfeedingTime === undefined){
                     setCurrentStep(5);
                     return;
                 }
@@ -184,6 +183,7 @@ function CardAccordion(props){
                     return
                 }
                 else {
+                    userDetails.finalCalories = calculateCalories(userDetails);
                     setCurrentStep(7);
                     return
                 }
@@ -200,6 +200,7 @@ function CardAccordion(props){
                     return
                 }
                 else {
+                    userDetails.finalCalories = calculateCalories(userDetails);
                     setCurrentStep(7);
                     return
                 }
@@ -207,7 +208,6 @@ function CardAccordion(props){
             //#endregion
         }
         //#endregion
-        // setCurrentStep(6);
     }
 
     //#region First section button
@@ -258,12 +258,22 @@ function CardAccordion(props){
     const isThirdButtonDisabled = !(stepThreefirstSelection);
     //#endregion
 
-    //#region 
+    //#region Fourth section button
     const [stepFourfirstSelection, setStepFourFirstSelection] = useState("");
     const isFourthButtonDisabled = !(stepFourfirstSelection);
     //#endregion
     
+    //#region Fifth section button
+    const [stepFivefirstSelection, setStepFiveFirstSelection] = useState("");
+    const [stepFivesecondSelection, setStepFiveSecondSelection] = useState("");
+    const isFifthButtonDisabled = !(stepFivefirstSelection && stepFivesecondSelection);
+    //#endregion
     
+    //#region Sixth section button
+    const [stepSixfirstSelection, setStepSixFirstSelection] = useState("");
+    const isSixthButtonDisabled = !(stepSixfirstSelection);
+    //#endregion
+
     //#region 
 
     return (
@@ -457,6 +467,65 @@ function CardAccordion(props){
                 )
             }
             {/* 4th step */}
+
+            {/* 5th step */}
+            {currentStep === 5 && 
+                (
+                    <AccordionBlock header=
+                    {
+                        <div>
+                            <h1>
+                                Breastfeeding / Lactating
+                            </h1>
+                        </div>
+                    } 
+                    content={
+                        <div style={styles.container}>
+                            <h3>How much breastmilk are you feeding?</h3>
+
+                            <Selector hint="Select below" selectValues={breastfeedingAmount} onChange={(e) => {
+                                setUserDetails(prev => ({...prev, breastfeedingAmount: e.target.value}));
+                                setStepFiveFirstSelection(e.target.value);
+                            }}/>
+
+                            <h3>How long have you been breastfeeding/lactating?</h3>
+                            <Selector hint="Select below" selectValues={breastfeedingTime} onChange={(e) => {
+                                setUserDetails(prev => ({...prev, breastfeedingTime: e.target.value}));
+                                setStepFiveSecondSelection(e.target.value);
+                            }}/>
+
+                            <br />
+                            <Button id="breastfeeding-button" disabled={isFifthButtonDisabled} onClick={stepFinished} title="Next"/>
+                        </div>
+                    }/>
+                )
+            }
+            {/* 5th step */}
+
+            {/* 6th step */}
+            {currentStep === 6 && 
+                (
+                    <AccordionBlock header=
+                    {
+                        <div>
+                            <h1>
+                                Physical activity
+                            </h1>
+                        </div>
+                    } 
+                    content={
+                        <div style={styles.container}>
+                            <Selector hint="Select below" selectValues={activitySelector} onChange={(e) => {
+                                setUserDetails(prev => ({...prev, activityLevel: e.target.value}));
+                                setStepSixFirstSelection(e.target.value);
+                            }}/>
+                            <br />
+                            <Button id="trimester-button" disabled={isSixthButtonDisabled} onClick={stepFinished} title="Next"/>
+                        </div>
+                    }/>
+                )
+            }
+            {/* 6th step */}
 
 
 

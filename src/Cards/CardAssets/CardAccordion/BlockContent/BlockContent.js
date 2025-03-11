@@ -2,7 +2,7 @@ import './BlockContent.css';
 
 function BlockContent(props) {
     return(
-        <div class="block-content">
+        <div className="block-content">
             {props.content}
         </div>
     );

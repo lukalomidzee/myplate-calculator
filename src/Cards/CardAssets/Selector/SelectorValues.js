@@ -119,3 +119,20 @@ export const trimesterSelector = {
     2: "Second Trimester",
     3: "Third Trimester",
 }
+
+export const breastfeedingAmount = {
+    all: "Breast milk only, no formula or foods",
+    half: "At least half breast milk & some formula or foods",
+    some: "Some breast milk, mostly formula or foods"
+}
+
+export const breastfeedingTime = {
+    "0-6": "0-6 months",
+    "6<": "More than six months"
+} 
+
+export const activitySelector = {
+    low: "Less than 30 min/day of moderate activity",
+    mid: "30 to 60 min/day of moderate activity",
+    high: "More than 60 min/day of moderate activity"
+}
