@@ -24,9 +24,9 @@
 
 @media screen and (max-width: 1024px) {
 
-    #card-header-paragraph {
+    /* #card-header-paragraph {
         display: none;
-    }
+    } */
 }
 
 @media screen and (min-width: 1280px){

@@ -7,8 +7,9 @@
     min-width: 35%;
     width: var(--card-width);
     max-width: 95%;
-    margin-top: 8rem;
-    height: var(--card-height);
+    margin-top: 5rem;
+    min-height: var(--card-height);
+    height: auto;
     /* height: 60%; */
     /* min-height: 60%; */
     background-color: white;

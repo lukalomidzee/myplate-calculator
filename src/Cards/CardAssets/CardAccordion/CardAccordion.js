@@ -11,13 +11,9 @@ function CardAccordion(props){
     let userDetails = props.userDetails;
     let setUserDetails = props.setUserDetails;
 
-    // let [buttonDisabled, setButtonDisabled] = useState(true);
-
     let ageGroup = undefined;
     
     const [currentStep, setCurrentStep] = useState(1);
-
-    // let lastStep = 0;
 
     function finalResults(){
         if (userDetails.age < 2){
@@ -45,7 +41,6 @@ function CardAccordion(props){
         document.getElementById('form').style.backgroundPositionY = backgroundPosition + '%';
         //#endregion
  
-        console.log(userDetails);
         //#region Under 2 years - No need to calculate additional details
         if (userDetails.age <= 2){
             switch (userDetails.age) {
@@ -67,94 +62,100 @@ function CardAccordion(props){
         //#endregion
         //#region 2-8 years - first, we determine sex and then activity level
         else if (userDetails.age <= 8){
-            if (userDetails.sex === "male")
-                switch (userDetails.age) {
-                case 2:
-                    userDetails.low = 1000;
-                    userDetails.mid = 1000;
-                    userDetails.high = 1000;
-                    break;
-                case 3:
-                    userDetails.low = 1000;
-                    userDetails.mid = 1400;
-                    userDetails.high = 1400;
-                    break;
-                case 4:
-                    userDetails.low = 1000;
-                    userDetails.mid = 1400;
-                    userDetails.high = 1400;
-                    break;
-                case 5:
-                    userDetails.low = 1200;
-                    userDetails.mid = 1400;
-                    userDetails.high = 1600;
-                    break;
-                case 6:
-                    userDetails.low = 1200;
-                    userDetails.mid = 1400;
-                    userDetails.high = 1600;
-                    break;
-                case 7:
-                    userDetails.low = 1400;
-                    userDetails.mid = 1600;
-                    userDetails.high = 1800;
-                    break;
-                case 8:
-                    userDetails.low = 1400;
-                    userDetails.mid = 1600;
-                    userDetails.high = 2000;
-                    break;
-                default:
-                    userDetails.low = 1200;
-                    userDetails.mid = 1400;
-                    userDetails.high = 1600;
-                    break;
+            if (userDetails.activityLevel === undefined){
+                if (userDetails.sex === "male")
+                    switch (parseInt(userDetails.age)) {
+                    case 2:
+                        userDetails.low = 1000;
+                        userDetails.mid = 1000;
+                        userDetails.high = 1000;
+                        break;
+                    case 3:
+                        userDetails.low = 1000;
+                        userDetails.mid = 1400;
+                        userDetails.high = 1400;
+                        break;
+                    case 4:
+                        userDetails.low = 1000;
+                        userDetails.mid = 1400;
+                        userDetails.high = 1400;
+                        break;
+                    case 5:
+                        userDetails.low = 1200;
+                        userDetails.mid = 1400;
+                        userDetails.high = 1600;
+                        break;
+                    case 6:
+                        userDetails.low = 1200;
+                        userDetails.mid = 1400;
+                        userDetails.high = 1600;
+                        break;
+                    case 7:
+                        userDetails.low = 1400;
+                        userDetails.mid = 1600;
+                        userDetails.high = 1800;
+                        break;
+                    case 8:
+                        userDetails.low = 1400;
+                        userDetails.mid = 1600;
+                        userDetails.high = 2000;
+                        break;
+                    default:
+                        userDetails.low = 1200;
+                        userDetails.mid = 1400;
+                        userDetails.high = 1600;
+                        break;
+                    }
+                else
+                    switch (parseInt(userDetails.age)) {
+                    case 2:
+                        userDetails.low = 1000;
+                        userDetails.mid = 1000;
+                        userDetails.high = 1000;
+                        break;
+                    case 3:
+                        userDetails.low = 1000;
+                        userDetails.mid = 1200;
+                        userDetails.high = 1400;
+                        break;
+                    case 4:
+                        userDetails.low = 1200;
+                        userDetails.mid = 1400;
+                        userDetails.high = 1400;
+                        break;
+                    case 5:
+                        userDetails.low = 1200;
+                        userDetails.mid = 1400;
+                        userDetails.high = 1400;
+                        break;
+                    case 6:
+                        userDetails.low = 1200;
+                        userDetails.mid = 1400;
+                        userDetails.high = 1600;
+                        break;
+                    case 7:
+                        userDetails.low = 1200;
+                        userDetails.mid = 1600;
+                        userDetails.high = 1800;
+                        break
+                    case 8:
+                        userDetails.low = 1400;
+                        userDetails.mid = 1600;
+                        userDetails.high = 1800;
+                        break;
+                    default:
+                        userDetails.low = 1200;
+                        userDetails.mid = 1400;
+                        userDetails.high = 1400;
+                        break;
                 }
-            else
-                switch (userDetails.age) {
-                case 2:
-                    userDetails.low = 1000;
-                    userDetails.mid = 1000;
-                    userDetails.high = 1000;
-                    break;
-                case 3:
-                    userDetails.low = 1000;
-                    userDetails.mid = 1200;
-                    userDetails.high = 1400;
-                    break;
-                case 4:
-                    userDetails.low = 1200;
-                    userDetails.mid = 1400;
-                    userDetails.high = 1400;
-                    break;
-                case 5:
-                    userDetails.low = 1200;
-                    userDetails.mid = 1400;
-                    userDetails.high = 1400;
-                    break;
-                case 6:
-                    userDetails.low = 1200;
-                    userDetails.mid = 1400;
-                    userDetails.high = 1600;
-                    break;
-                case 7:
-                    userDetails.low = 1200;
-                    userDetails.mid = 1600;
-                    userDetails.high = 1800;
-                    break
-                case 8:
-                    userDetails.low = 1400;
-                    userDetails.mid = 1600;
-                    userDetails.high = 1800;
-                    break;
-                default:
-                    userDetails.low = 1200;
-                    userDetails.mid = 1400;
-                    userDetails.high = 1400;
-                    break;
+                setCurrentStep(6);
+                return;
+            } else {
+                userDetails.finalCalories = userDetails[userDetails.activityLevel];
+                setCurrentStep(7);
+                return;
             }
-            setCurrentStep(6);
-            return;
         }
         //#endregion
         //#region Age over 8 years
@@ -210,6 +211,7 @@ function CardAccordion(props){
         //#endregion
     }
 
+    //#region Selectors and inputs
     //#region First section button
     const [stepOnefirstSelection, setStepOneFirstSelection] = useState("");
     const [stepOnesecondSelection, setStepOneSecondSelection] = useState("");
@@ -270,11 +272,11 @@ function CardAccordion(props){
     //#endregion
     
     //#region Sixth section button
+    
+    //#endregion
     const [stepSixfirstSelection, setStepSixFirstSelection] = useState("");
     const isSixthButtonDisabled = !(stepSixfirstSelection);
     //#endregion
-
-    //#region 
 
     return (
         
@@ -286,10 +288,10 @@ function CardAccordion(props){
                     {
                         <div>
                             <h1>
-                                Age & Sex
+                                ასაკი & სქესი
                             </h1>
                             <p>
-                                Please provide data accordingly to calculate correct results. <br /><br /><b>NOTE:</b> No personal information is being stored
+                                გთხოვთ მოგვაწოდოთ სწორი ინფორმაცია ზუსტი შედეგის მისაღებად. <br /><br /><b>შენიშვნა:</b> თქვენი პირადი მონაცემები არ ინახება აპლიკაციაში
                             </p>
                         </div>
                     } 
@@ -297,16 +299,16 @@ function CardAccordion(props){
                         <div style={styles.container}>
                             
                             
-                            <Selector hint="Age" selectValues={ageSelector} onChange={(e) => {
+                            <Selector hint="ასაკი" selectValues={ageSelector} onChange={(e) => {
                                 setUserDetails(prev => ({...prev, age: e.target.value}));
                                 setStepOneFirstSelection(e.target.value);
                             }}/>
-                            <Selector hint="Select Sex" selectValues={sexSelector} onChange={(e) => {
+                            <Selector hint="სქესი" selectValues={sexSelector} onChange={(e) => {
                                 setUserDetails(prev => ({...prev, sex: e.target.value}));
                                 setStepOneSecondSelection(e.target.value);
                             }}/>
                             <br />
-                            <Button id="age-sex-button" disabled={isFirstButtonDisabled} onClick={stepFinished} title="Next"/>
+                            <Button id="age-sex-button" disabled={isFirstButtonDisabled} onClick={stepFinished} title="შემდეგი"/>
                         </div>
                     }/>
                 )
@@ -318,38 +320,38 @@ function CardAccordion(props){
             {currentStep === 2 && 
                 (
                     <AccordionBlock
-                        header={<h1>Height & Weight</h1>}
+                        header={<h1>სიმაღლე & წონა</h1>}
                         content={
                             <div style={styles.container}>
                                 {/* Height Input */}
                                 <Input
                                     id="height-input"
-                                    name="Height (CM)"
+                                    name="სიმაღლე (CM)"
                                     type="number"
                                     min={100}
                                     max={300}
                                     style={{ outline: heightTouched && !isHeightValid ? "2px solid red" : "none" }}
                                     onChange={handleHeightChange}
                                 />
-                                <div style={{height: '1rem'}}>
+                                <div style={{height: '2rem'}}>
                                     {heightTouched && !isHeightValid && (
-                                        <p style={{ color: "red", margin: 0 }}>Height must be between 100-300 cm</p>
+                                        <p style={{ color: "red", margin: 0, marginBottom: "0.5rem", fontSize: "0.8rem" }}>სიმაღლის დასაშვები ფარგლებია 100-300 cm</p>
                                     )}
                                 </div>
 
                                 {/* Weight Input */}
                                 <Input
                                     id="weight-input"
-                                    name="Weight (KG)"
+                                    name="წონა (KG)"
                                     type="number"
                                     min={14}
                                     max={630}
                                     style={{ outline: weightTouched && !isWeightValid ? "2px solid red" : "none" }}
                                     onChange={handleWeightChange}
                                 />
-                                <div style={{height: '1rem'}}>
+                                <div style={{height: '2rem'}}>
                                     {weightTouched && !isWeightValid && (
-                                        <p style={{ color: "red", margin: 0 }}>Weight must be between 14-630 kg</p>
+                                        <p style={{ color: "red", margin: 0, fontSize: "0.8rem" }}>წონის დასაშვები ფარგლებია 14-630 kg</p>
                                     )}
                                 </div>
 
@@ -393,10 +395,10 @@ function CardAccordion(props){
                     {
                         <div>
                             <h1>
-                                Pregnancy and Breastfeeding
+                                ორსულობა და ძუძუთი კვება
                             </h1>
                             <p>
-                                Are you pregnant or breastfeeding/lactating?
+                                აირჩიეთ თქვენთვის შესაბამისი ინფორმაცია
                             </p>
                         </div>
                     } 
@@ -404,7 +406,7 @@ function CardAccordion(props){
                         <div style={styles.container}>
                             
                             
-                            <Selector hint="Select below" selectValues={pregnancyBreastfeedingSelector} onChange={(e) => {
+                            <Selector hint="..." selectValues={pregnancyBreastfeedingSelector} onChange={(e) => {
                                 if (e.target.value === "pregnant"){
                                     setUserDetails(prev => ({
                                         ...prev, pregnant: true,
@@ -434,7 +436,7 @@ function CardAccordion(props){
                             }}/>
                             
                             <br />
-                            <Button id="pregnancy-breastfeeding-button" disabled={isThirdButtonDisabled} onClick={stepFinished} title="Next"/>
+                            <Button id="pregnancy-breastfeeding-button" disabled={isThirdButtonDisabled} onClick={stepFinished} title="შემდეგი"/>
                         </div>
                     }/>
                 )
@@ -448,7 +450,7 @@ function CardAccordion(props){
                     {
                         <div>
                             <h1>
-                                What trimester are you in?
+                                აირჩიეთ ტრიმესტრი?
                             </h1>
                         </div>
                     } 
@@ -456,12 +458,12 @@ function CardAccordion(props){
                         <div style={styles.container}>
                             
                             
-                            <Selector hint="Select below" selectValues={trimesterSelector} onChange={(e) => {
+                            <Selector hint="..." selectValues={trimesterSelector} onChange={(e) => {
                                 setUserDetails(prev => ({...prev, pregnancyTrimester: e.target.value}));
                                 setStepFourFirstSelection(e.target.value);
                             }}/>
                             <br />
-                            <Button id="trimester-button" disabled={isFourthButtonDisabled} onClick={stepFinished} title="Next"/>
+                            <Button id="trimester-button" disabled={isFourthButtonDisabled} onClick={stepFinished} title="შემდეგი"/>
                         </div>
                     }/>
                 )
@@ -475,21 +477,21 @@ function CardAccordion(props){
                     {
                         <div>
                             <h1>
-                                Breastfeeding / Lactating
+                                ძუძუთი კვება / ლაქტაცია
                             </h1>
                         </div>
                     } 
                     content={
                         <div style={styles.container}>
-                            <h3>How much breastmilk are you feeding?</h3>
+                            <h3>მიუთითეთ ლაქტაციის ტიპი</h3>
 
-                            <Selector hint="Select below" selectValues={breastfeedingAmount} onChange={(e) => {
+                            <Selector hint="..." selectValues={breastfeedingAmount} onChange={(e) => {
                                 setUserDetails(prev => ({...prev, breastfeedingAmount: e.target.value}));
                                 setStepFiveFirstSelection(e.target.value);
                             }}/>
 
-                            <h3>How long have you been breastfeeding/lactating?</h3>
-                            <Selector hint="Select below" selectValues={breastfeedingTime} onChange={(e) => {
+                            <h3>მიუთითეთ ლაქტაციის ხანგრძლივობა</h3>
+                            <Selector hint="..." selectValues={breastfeedingTime} onChange={(e) => {
                                 setUserDetails(prev => ({...prev, breastfeedingTime: e.target.value}));
                                 setStepFiveSecondSelection(e.target.value);
                             }}/>
@@ -509,13 +511,13 @@ function CardAccordion(props){
                     {
                         <div>
                             <h1>
-                                Physical activity
+                                ფიზიკური აქტიურობა
                             </h1>
                         </div>
                     } 
                     content={
                         <div style={styles.container}>
-                            <Selector hint="Select below" selectValues={activitySelector} onChange={(e) => {
+                            <Selector hint="დღეში" selectValues={activitySelector} onChange={(e) => {
                                 setUserDetails(prev => ({...prev, activityLevel: e.target.value}));
                                 setStepSixFirstSelection(e.target.value);
                             }}/>
@@ -535,23 +537,21 @@ function CardAccordion(props){
                     <AccordionBlock header=
                     {
                         <div>
-                            <h1>
-                                Age & Sex
-                            </h1>
+                            
                             <h3>
-                                {ageSelector[userDetails.age]} / {userDetails.sex}
+                                {ageSelector[userDetails.age]} / {sexSelector[userDetails.sex]} სქესი
                             </h3>
                             <p>
-                                Based on the provided data, estimated calories intake should be <b>{userDetails.finalCalories}</b>.
+                                მოწოდებულ ინფორმაციაზე დაყრდნობით, კალორიების დღიური დოზა შეადგენს: <h2 style={{color: "rgb(7, 78, 102)"}}>{userDetails.finalCalories}</h2>
                             </p>
                             <p>
-                                Click the button below to see detailed outcome of results. 
+                                დეტალური ინფორმაციის სანახავად მიჰყევით ინსტრუქციას 
                             </p>
                         </div>
                     } 
                     content={
                         <div style={styles.container}>
-                            <Button id="view-results" onClick={finalResults} title="Results"/>
+                            <Button id="view-results" onClick={finalResults} title="შედეგები"/>
                         </div>
                     }/>
                 )

@@ -10,12 +10,12 @@ function IntroductionCard(props) {
         <section className='introduction card' id="introduction">
             <CardHeader classList={"introduction-header"} header="GNSPEN"/>
             <CardBody 
-                header="Calculate Your MyPlate Plan" 
-                paragraph="The MyPlate Plan* shows you what and how much to eat from the food groups over the course of a day. MyPlate Plans are available in multiple languages and have been culturally adapted to reflect the foods of these cultures."
+                header="გამოთვალე შენი MyPlate გეგმა" 
+                paragraph="MyPlate გეგმა გვიჩვენებს თუ რა ტიპის და რა რაოდენობის საკვები უნდა მივირთვათ დღის განმავლობაში, ჩვენს ფიზიკურ მონაცემებზე დაყრდნობით. გეგმა მოიცავს სხვადასხვა ტიპის საკვების ფართო სპექტრს."
             />
-            <Button onClick={props.changeState} title="Get Started!" />
+            <Button onClick={props.changeState} title="დაწყება!" />
             <CardFooter title={
-                '*For more information on how the MyPlate Plan calculator uses different formulas to create your plan, please visit MyPlate.gov.'
+                '*დამატებითი ინფორმაციისთვის ეწვიეთ ჩვენს ვებ-გვერდს'
             }/>
         </section>
     );
