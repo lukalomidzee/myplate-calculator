@@ -1,7 +1,8 @@
 Age & Sex : step 1
 Height & Weight : step 2
 Pregnancy & Breastfeeding : step 3
-BreastMilk & Lactating : step 4
-Activity : step 5
-Submit results : step 6
-Final calories : step 7
+Pregnancy Trimester : step 4
+BreastMilk & Lactating : step 5
+Activity : step 6
+Submit results : step 7
+Final calories : step 8
