@@ -511,7 +511,7 @@ function CardAccordion(props){
                     {
                         <div>
                             <h1>
-                                ფიზიკური აქტიურობა
+                                ფიზიკური აქტივობა
                             </h1>
                         </div>
                     } 
