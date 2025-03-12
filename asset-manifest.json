@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/myplate-calculator/static/css/main.f84866dd.css",
+    "main.css": "/myplate-calculator/static/css/main.20dfdb85.css",
     "main.js": "/myplate-calculator/static/js/main.619bc1bc.js",
     "static/media/background.Dahyfeam.webp": "/myplate-calculator/static/media/background.Dahyfeam.7b88c2710a35319a8a09.webp",
     "static/media/myplate-brand.svg": "/myplate-calculator/static/media/myplate-brand.722951a652cbe45606af5ceae85dcd7c.svg",
     "index.html": "/myplate-calculator/index.html",
-    "main.f84866dd.css.map": "/myplate-calculator/static/css/main.f84866dd.css.map",
+    "main.20dfdb85.css.map": "/myplate-calculator/static/css/main.20dfdb85.css.map",
     "main.619bc1bc.js.map": "/myplate-calculator/static/js/main.619bc1bc.js.map"
   },
   "entrypoints": [
-    "static/css/main.f84866dd.css",
+    "static/css/main.20dfdb85.css",
     "static/js/main.619bc1bc.js"
   ]
 }
