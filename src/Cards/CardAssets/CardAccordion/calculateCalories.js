@@ -76,6 +76,10 @@ function calculateCalories(userDetails){
                     ((constants.weightFactor * userDetails.weight) + (constants.heightFactor * (userDetails.height/100))))
                     + constants.additional;            
     finalResult = 200 * Math.round(finalResult / 200);
+
+    if (finalResult > 3200){
+        finalResult = 3200;
+    }
     
     return finalResult;
 }
